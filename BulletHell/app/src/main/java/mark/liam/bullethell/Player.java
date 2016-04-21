@@ -17,4 +17,18 @@ public class Player extends Entity
     {
 
     }
+
+    public void onHit(Entity other, AABB overlap)
+    {
+
+    }
+    public void takeDamage(Entity other, int damage)
+    {
+
+    }
+
+    public int getMaxHP()
+    {
+        return 15;
+    }
 }

@@ -34,12 +34,14 @@ public class GameScreen extends Screen {
         world.update(deltaTime);
     }
     
-    private void updateReady(List<TouchEvent> touchEvents) {
+    private void updateReady(List<TouchEvent> touchEvents)
+    {
         if(touchEvents.size() > 0)
             state = GameState.Running;
     }
     
-    private void updateRunning(List<TouchEvent> touchEvents, float deltaTime) {        
+    private void updateRunning(List<TouchEvent> touchEvents, float deltaTime)
+    {
         int len = touchEvents.size();
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
@@ -51,27 +53,16 @@ public class GameScreen extends Screen {
                     return;
                 }
             }
-            if(event.type == TouchEvent.TOUCH_DOWN) {
-                if(event.x < 64 && event.y > 416) {
-                    world.snake.turnLeft();
-                }
-                if(event.x > 256 && event.y > 416) {
-                    world.snake.turnRight();
-                }
-            }
         }
-        
+
         world.update(deltaTime);
-        if(world.gameOver) {
-            if(Settings.soundEnabled)
-                Assets.bitten.play(1);
+        if(world.gameOver)
+        {
             state = GameState.GameOver;
         }
         if(oldScore != world.score) {
             oldScore = world.score;
             score = "" + oldScore;
-            if(Settings.soundEnabled)
-                Assets.eat.play(1);
         }
     }
     
@@ -86,11 +77,11 @@ public class GameScreen extends Screen {
                             Assets.click.play(1);
                         state = GameState.Running;
                         return;
-                    }                    
+                    }
                     if(event.y > 148 && event.y < 196) {
                         if(Settings.soundEnabled)
                             Assets.click.play(1);
-                        game.setScreen(new MainMenuScreen(game));                        
+                        game.setScreen(new MainMenuScreen(game));
                         return;
                     }
                 }
@@ -133,64 +124,9 @@ public class GameScreen extends Screen {
         drawText(g, score, g.getWidth() / 2 - score.length()*20 / 2, g.getHeight() - 42);                
     }
     
-    private void drawWorld(World world) {
-        Graphics g = game.getGraphics();
-        Snake snake = world.snake;
-        Snake aisnake = world.aisnake;
-        SnakePart head = snake.parts.get(0);
-        SnakePart aihead = aisnake.parts.get(0);
-        Stain stain = world.stain;
-        
-        
-        Pixmap stainPixmap = null;
-        if(stain.type == Stain.TYPE_1)
-            stainPixmap = Assets.stain1;
-        if(stain.type == Stain.TYPE_2)
-            stainPixmap = Assets.stain2;
-        if(stain.type == Stain.TYPE_3)
-            stainPixmap = Assets.stain3;
-        int x = stain.x * 32;
-        int y = stain.y * 32;      
-        g.drawPixmap(stainPixmap, x, y);             
-        
-        int len = snake.parts.size();
-        for(int i = 1; i < len; i++) {
-            SnakePart part = snake.parts.get(i);
-            x = part.x * 32;
-            y = part.y * 32;
-            g.drawPixmap(Assets.tail, x, y);
-        }
-        len = aisnake.parts.size();
-        for(int i = 1; i < len; i++) {
-            SnakePart part = aisnake.parts.get(i);
-            x = part.x * 32;
-            y = part.y * 32;
-            g.drawPixmap(Assets.tail, x, y);
-        }
-
-        Pixmap headPixmap = null;
-        if(snake.direction == Snake.UP) 
-            headPixmap = Assets.headUp;
-        if(snake.direction == Snake.LEFT) 
-            headPixmap = Assets.headLeft;
-        if(snake.direction == Snake.DOWN) 
-            headPixmap = Assets.headDown;
-        if(snake.direction == Snake.RIGHT) 
-            headPixmap = Assets.headRight;        
-        x = head.x * 32 + 16;
-        y = head.y * 32 + 16;
-        g.drawPixmap(headPixmap, x - headPixmap.getWidth() / 2, y - headPixmap.getHeight() / 2);
-        if(aisnake.direction == Snake.UP)
-            headPixmap = Assets.headUp;
-        if(aisnake.direction == Snake.LEFT)
-            headPixmap = Assets.headLeft;
-        if(aisnake.direction == Snake.DOWN)
-            headPixmap = Assets.headDown;
-        if(aisnake.direction == Snake.RIGHT)
-            headPixmap = Assets.headRight;
-        x = aihead.x * 32 + 16;
-        y = aihead.y * 32 + 16;
-        g.drawPixmap(headPixmap, x - headPixmap.getWidth() / 2, y - headPixmap.getHeight() / 2);
+    private void drawWorld(World world)
+    {
+        world.updateDraw(game.getGraphics());
     }
     
     private void drawReadyUI() {

@@ -20,6 +20,7 @@ public abstract class Entity
         bounds = bb;
         image = p;
         hp = getMaxHP();
+        velocity = new Vec2d(0, 0);
     }
 
     public void Update(float deltaTime)

@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
+import badlogic.androidgames.framework.Graphics;
+
 public class World {
     static final int WORLD_WIDTH = 10;
     static final int WORLD_HEIGHT = 13;
@@ -39,6 +41,14 @@ public class World {
             entities.remove(e);
         }
         dead.clear();
+    }
+
+    public void updateDraw(Graphics g)
+    {
+        for(Entity e : entities)
+        {
+            e.Draw(g);
+        }
     }
 
     public void SpawnEntity(Entity e)
