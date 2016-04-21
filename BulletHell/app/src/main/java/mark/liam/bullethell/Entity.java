@@ -8,18 +8,18 @@ import mark.liam.bullethell.Collision.Vec2d;
 /**
  * Created by mark on 4/21/2016.
  */
-public class Entity
+public abstract class Entity
 {
     Vec2d velocity;
     AABB bounds;
     Pixmap image;
-    protected int MaxHP = 1;
     int hp;
 
     public Entity(AABB bb, Pixmap p)
     {
         bounds = bb;
         image = p;
+        hp = getMaxHP();
     }
 
     public void Update(float deltaTime)
@@ -34,11 +34,15 @@ public class Entity
 
     public void Draw(Graphics g)
     {
-        g.drawPixmap(image, (int)bounds.lower.x, (int)bounds.lower.y);
+        g.drawPixmap(image, (int) bounds.lower.x, (int) bounds.lower.y);
     }
 
     public boolean isDead()
     {
         return hp <= 0;
     }
+
+    public abstract void onHit(Entity other, AABB overlap);
+    public abstract void takeDamage(Entity other, int damage);
+    public abstract int getMaxHP();
 }

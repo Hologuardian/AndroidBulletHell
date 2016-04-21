@@ -29,18 +29,9 @@ public class GameScreen extends Screen {
     }
 
     @Override
-    public void update(float deltaTime) {
-        List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
-        game.getInput().getKeyEvents();
-        
-        if(state == GameState.Ready)
-            updateReady(touchEvents);
-        if(state == GameState.Running)
-            updateRunning(touchEvents, deltaTime);
-        if(state == GameState.Paused)
-            updatePaused(touchEvents);
-        if(state == GameState.GameOver)
-            updateGameOver(touchEvents);        
+    public void update(float deltaTime)
+    {
+        world.update(deltaTime);
     }
     
     private void updateReady(List<TouchEvent> touchEvents) {
