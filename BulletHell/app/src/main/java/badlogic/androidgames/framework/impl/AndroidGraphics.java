@@ -1,4 +1,5 @@
-package com.badlogic.androidgames.framework.impl;
+package badlogic.androidgames.framework.impl;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,8 +14,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 
-import com.badlogic.androidgames.framework.Graphics;
-import com.badlogic.androidgames.framework.Pixmap;
+import badlogic.androidgames.framework.Graphics;
+import badlogic.androidgames.framework.Pixmap;
 
 public class AndroidGraphics implements Graphics {
     AssetManager assets;

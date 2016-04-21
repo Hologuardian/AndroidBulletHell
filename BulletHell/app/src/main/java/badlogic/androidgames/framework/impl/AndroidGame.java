@@ -1,4 +1,5 @@
-package com.badlogic.androidgames.framework.impl;
+package badlogic.androidgames.framework.impl;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,12 +12,12 @@ import android.os.PowerManager.WakeLock;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.badlogic.androidgames.framework.Audio;
-import com.badlogic.androidgames.framework.FileIO;
-import com.badlogic.androidgames.framework.Game;
-import com.badlogic.androidgames.framework.Graphics;
-import com.badlogic.androidgames.framework.Input;
-import com.badlogic.androidgames.framework.Screen;
+import badlogic.androidgames.framework.Audio;
+import badlogic.androidgames.framework.FileIO;
+import badlogic.androidgames.framework.Game;
+import badlogic.androidgames.framework.Graphics;
+import badlogic.androidgames.framework.Input;
+import badlogic.androidgames.framework.Screen;
 
 public abstract class AndroidGame extends Activity implements Game {
     AndroidFastRenderView renderView;

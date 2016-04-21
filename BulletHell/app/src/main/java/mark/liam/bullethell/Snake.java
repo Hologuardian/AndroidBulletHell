@@ -1,6 +1,5 @@
 package mark.liam.bullethell;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

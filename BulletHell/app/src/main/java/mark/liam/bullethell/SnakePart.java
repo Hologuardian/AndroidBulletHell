@@ -1,6 +1,5 @@
 package mark.liam.bullethell;
 
-
 public class SnakePart {
     public int x, y;
     

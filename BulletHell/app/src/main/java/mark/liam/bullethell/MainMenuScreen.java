@@ -1,6 +1,5 @@
 package mark.liam.bullethell;
 
-
 import java.util.List;
 
 import badlogic.androidgames.framework.Game;

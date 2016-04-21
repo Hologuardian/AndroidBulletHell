@@ -1,6 +1,5 @@
 package mark.liam.bullethell;
 
-
 import java.util.Random;
 
 public class World {
@@ -11,6 +10,7 @@ public class World {
     static final float TICK_DECREMENT = 0.05f;
 
     public Snake snake;
+    public SnakeAI aisnake;
     public Stain stain;
     public boolean gameOver = false;;
     public int score = 0;
@@ -22,6 +22,7 @@ public class World {
 
     public World() {
         snake = new Snake(Snake.UP, 5, 6);
+        aisnake = new SnakeAI(this, Snake.DOWN, 2, 2);
         placeStain();
     }
 
@@ -63,8 +64,14 @@ public class World {
 
         while (tickTime > tick) {
             tickTime -= tick;
+            aisnake.updateAI();
             snake.advance();
-            if (snake.checkBitten(snake)) {
+            aisnake.advance();
+            if (snake.checkBitten(aisnake)) {
+                gameOver = true;
+                return;
+            }
+            if (aisnake.checkBitten(snake)) {
                 gameOver = true;
                 return;
             }
@@ -83,6 +90,17 @@ public class World {
 
                 if (score % 100 == 0 && tick - TICK_DECREMENT > 0) {
                     tick -= TICK_DECREMENT;
+                }
+            }
+            SnakePart aihead = aisnake.parts.get(0);
+            if (aihead.x == stain.x && aihead.y == stain.y) {
+                score += SCORE_INCREMENT;
+                aisnake.eat();
+                if (aisnake.parts.size() == WORLD_WIDTH * WORLD_HEIGHT) {
+                    gameOver = true;
+                    return;
+                } else {
+                    placeStain();
                 }
             }
         }

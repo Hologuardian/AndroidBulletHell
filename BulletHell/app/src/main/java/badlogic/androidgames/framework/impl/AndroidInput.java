@@ -1,4 +1,5 @@
-package com.badlogic.androidgames.framework.impl;
+package badlogic.androidgames.framework.impl;
+
 
 import java.util.List;
 
@@ -6,7 +7,7 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.view.View;
 
-import com.badlogic.androidgames.framework.Input;
+import badlogic.androidgames.framework.Input;
 
 public class AndroidInput implements Input {    
     AccelerometerHandler accelHandler;
