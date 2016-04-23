@@ -93,8 +93,9 @@ public class World {
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
 
-        paint.setTextSize(20);
+        paint.setTextSize(80);
         g.drawText(String.valueOf(timeAlive), screenSize.x - 50 - String.valueOf(timeAlive).length() * 10, 50, paint);
+        g.drawText(String.valueOf(entities.size()), screenSize.x - 50 - String.valueOf(timeAlive).length() * 10, 150, paint);
         for(Entity e : entities)
         {
             e.Draw(g);

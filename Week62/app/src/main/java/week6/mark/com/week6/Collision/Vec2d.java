@@ -91,4 +91,9 @@ public class Vec2d
             return this;
         return other;
     }
+
+    public Vec2d Clone()
+    {
+        return new Vec2d(x, y);
+    }
 }

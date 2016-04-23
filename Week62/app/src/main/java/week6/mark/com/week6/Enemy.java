@@ -3,6 +3,8 @@ package week6.mark.com.week6;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.util.Random;
+
 import week6.mark.com.week6.Collision.AABB;
 import week6.mark.com.week6.Collision.Vec2d;
 
@@ -11,6 +13,7 @@ import week6.mark.com.week6.Collision.Vec2d;
  */
 public class Enemy extends Entity
 {
+    static final int timerMax = 20;
     float timer = 0;
     Bitmap bullet;
     World world;
@@ -19,6 +22,8 @@ public class Enemy extends Entity
         super(bb, p);
         this.bullet = bullet;
         world = w;
+        Random r = new Random();
+        timer = r.nextInt(timerMax);
     }
 
     @Override
@@ -26,10 +31,10 @@ public class Enemy extends Entity
     {
         super.Update(deltaTime);
         timer += deltaTime;
-        if(timer > 1.0f)
+        if(timer > timerMax)
         {
-            Bullet en = new Bullet(new AABB(this.bounds.lower, new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this);
-            en.AddVelocity(new Vec2d(0, 15));
+            Bullet en = new Bullet(new AABB(this.bounds.lower.Clone(), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this, world);
+            en.AddVelocity(new Vec2d(0, 15).Add(velocity.Clone()));
             world.SpawnEntity(en);
             timer = 0;
         }
@@ -42,7 +47,7 @@ public class Enemy extends Entity
     @Override
     public void takeDamage(Entity other, int damage)
     {
-
+        hp -= damage;
     }
 
     @Override

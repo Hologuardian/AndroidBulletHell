@@ -42,7 +42,7 @@ public class Player extends Entity
 
     public void Attack()
     {
-        Bullet en = new Bullet(new AABB(this.bounds.lower.Sum(new Vec2d(0, -bullet.getHeight())), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this);
+        Bullet en = new Bullet(new AABB(this.bounds.lower.Sum(new Vec2d(0, -bullet.getHeight())), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this, world);
         en.AddVelocity(new Vec2d(0, -15));
         world.SpawnEntity(en);
     }
@@ -54,7 +54,7 @@ public class Player extends Entity
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
 
-        paint.setTextSize(20);
+        paint.setTextSize(80);
         g.drawText(String.valueOf(hp), 50, 50, paint);
     }
     @Override
