@@ -29,9 +29,9 @@ public class GameView extends SurfaceView implements SensorEventListener
         gameLoopThread = new GameLoopThread(this);
         mSensorManager = (SensorManager) context
                 .getSystemService(Context.SENSOR_SERVICE);
-        sense = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sense = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         mSensorManager.registerListener(this, sense,
-                SensorManager.SENSOR_DELAY_GAME);
+                SensorManager.SENSOR_DELAY_FASTEST);
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -85,7 +85,7 @@ public class GameView extends SurfaceView implements SensorEventListener
         // interested in events where the touch position changed.
 
         switch (e.sensor.getType()) {
-            case Sensor.TYPE_GYROSCOPE:
+            case Sensor.TYPE_ROTATION_VECTOR:
                 world.player.AddVelocity(new Vec2d(e.values[0], e.values[1]));
                 break;
         }
