@@ -15,23 +15,18 @@ import android.view.SurfaceView;
 
 import week6.mark.com.week6.Collision.Vec2d;
 
-public class GameView extends SurfaceView implements SensorEventListener
+public class GameView extends SurfaceView
 {
     private Bitmap bmp;
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
     World world;
-    private SensorManager mSensorManager;
-    private Sensor sense;
+    private Accelerometer a;
 
     public GameView(Context context) {
         super(context);
         gameLoopThread = new GameLoopThread(this);
-        mSensorManager = (SensorManager) context
-                .getSystemService(Context.SENSOR_SERVICE);
-        sense = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        mSensorManager.registerListener(this, sense,
-                SensorManager.SENSOR_DELAY_FASTEST);
+        a = new Accelerometer(context);
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -79,31 +74,12 @@ public class GameView extends SurfaceView implements SensorEventListener
     }
 
     @Override
-    public void onSensorChanged(SensorEvent e) {
-        // MotionEvent reports input details from the touch screen
-        // and other input controls. In this case, you are only
-        // interested in events where the touch position changed.
-
-        switch (e.sensor.getType()) {
-            case Sensor.TYPE_ROTATION_VECTOR:
-                world.player.AddVelocity(new Vec2d(e.values[0], e.values[1]));
-                break;
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy)
-    {
-
-    }
-
-    @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         float[] out = new float[]{0, 0, 0};
 
-        world.player.AddVelocity(new Vec2d(out[0], out[2]));
+        world.player.AddVelocity(a.getValues());
         world.update(1);
         world.updateDraw(canvas);
 
