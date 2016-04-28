@@ -21,11 +21,17 @@ public class GameView extends SurfaceView implements SensorEventListener
     private SurfaceHolder holder;
     private GameLoopThread gameLoopThread;
     World world;
+    private SensorManager mSensorManager;
+    private Sensor sense;
 
     public GameView(Context context) {
         super(context);
         gameLoopThread = new GameLoopThread(this);
-
+        mSensorManager = (SensorManager) context
+                .getSystemService(Context.SENSOR_SERVICE);
+        sense = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, sense,
+                SensorManager.SENSOR_DELAY_GAME);
         holder = getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
 
