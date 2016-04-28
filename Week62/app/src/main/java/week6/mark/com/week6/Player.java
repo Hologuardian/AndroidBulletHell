@@ -42,7 +42,7 @@ public class Player extends Entity
 
     public void Attack()
     {
-        Bullet en = new Bullet(new AABB(this.bounds.lower.Sum(new Vec2d(0, -bullet.getHeight())), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this, world);
+        Bullet en = new Bullet(new AABB(this.bounds.lower.Sum(new Vec2d(image.getWidth()/2 - bullet.getWidth()/2, -bullet.getHeight() + image.getHeight()/2)), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this, world);
         en.AddVelocity(new Vec2d(0, -15));
         world.SpawnEntity(en);
     }
@@ -55,7 +55,7 @@ public class Player extends Entity
         paint.setStyle(Paint.Style.FILL);
 
         paint.setTextSize(80);
-        g.drawText(String.valueOf(hp), 50, 50, paint);
+        g.drawText(String.valueOf(hp), 100, 100, paint);
     }
     @Override
     public void onHit(Entity other, AABB overlap)

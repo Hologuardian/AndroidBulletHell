@@ -33,7 +33,7 @@ public class Enemy extends Entity
         timer += deltaTime;
         if(timer > timerMax)
         {
-            Bullet en = new Bullet(new AABB(this.bounds.lower.Clone(), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this, world);
+            Bullet en = new Bullet(new AABB(this.bounds.lower.Sum(new Vec2d(image.getWidth()/2 - bullet.getWidth()/2, -bullet.getHeight() + image.getHeight()/2)), new Vec2d(bullet.getWidth(), bullet.getHeight())), bullet, 1, this, world);
             en.AddVelocity(new Vec2d(0, 15).Add(velocity.Clone()));
             world.SpawnEntity(en);
             timer = 0;
