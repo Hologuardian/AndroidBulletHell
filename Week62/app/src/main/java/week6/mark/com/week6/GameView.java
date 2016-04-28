@@ -79,7 +79,7 @@ public class GameView extends SurfaceView implements SensorEventListener
         // interested in events where the touch position changed.
 
         switch (e.sensor.getType()) {
-            case Sensor.TYPE_ROTATION_VECTOR:
+            case Sensor.TYPE_GYROSCOPE:
                 world.player.AddVelocity(new Vec2d(e.values[0], e.values[1]));
                 break;
         }
